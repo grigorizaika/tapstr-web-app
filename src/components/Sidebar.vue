@@ -2,7 +2,7 @@
 <div class="sidebar" v-bind:style="{ width: this.width+'px', marginLeft: this.marginLeft+'px' }">
     <a href="javascript:void(0)" class="closebtn" @click="toggle()">&times;</a>
     <div id="userInfo">
-        <img id="userPicture" src="../assets/images/user_icon.png" alt="Italian Trulli">
+        <img id="userPicture" style="width:64px; height:64px;" src="https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/oranges.jpg" alt="User Picture">
         <a id="userName">{{ this.username }}</a>
     </div>
     <a @click="this.registerClicked" href="#">Log In</a>

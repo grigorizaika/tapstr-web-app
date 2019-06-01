@@ -71,10 +71,12 @@ export default {
 /* These imports should be in a single main file */
 @import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
 
+
+
 #login-section {
     background: rgba(0, 0, 0, .5) url('../assets/images/jakub-kapusnak-296881-unsplash-min.jpg');
     background-blend-mode: overlay;
-    width: 30%;
+    width: 40%;
     height: 560px; /* You must set a specified height */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
@@ -96,10 +98,6 @@ export default {
 }
 
 
-.tapstr-input:focus {
-  width: 320px;
-  outline-width: 0;
-}
 
 .colors-facebook {
     background: #3b5998;
@@ -136,6 +134,17 @@ export default {
   font-style: italic;
   padding: 16px;
   padding-top: 128px;
+}
+
+.tapstr-input:focus {
+  width: 80%;
+  outline-width: 0;
+}
+
+@media only screen and (max-width: 884px) {
+  #login-section {
+    width: 90%;
+  }
 }
 
 </style>

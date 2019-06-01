@@ -54,7 +54,7 @@ export default {
                 .then((response) => {
                     console.log(this.search + " ");
                     this.results = response.data.results;
-                })
+                });
     },
 };
 </script>
@@ -68,12 +68,11 @@ export default {
     height: 40px;
     border-radius: 36px;
 
-
 }
 
 .search-input:focus {
-  width: 464px;
-  outline-width: 0;
+  width: 100% !important;
+  outline-width: 0 !important;
 }
 
 .result-wrapper {
@@ -94,7 +93,7 @@ export default {
 
 #venuesAroundButton {
     position: absolute;
-    left: 50px;
+    margin-left: -120px;
     top: 80px;
 }
 

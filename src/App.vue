@@ -34,8 +34,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  width: 100%;
+  height: 100vh;
+
 }
 
+body {
+  padding: 0;
+  margin: 0;
+}
 .bumblebee-yellow {
   color: #ffb101;
 }
@@ -73,7 +80,6 @@ input { /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 0.9; /* Firefox */
     padding-left: 32px;
     border-width: 1px;
-
     transition: ease-in-out, width .35s ease-in-out;
     -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
     -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
@@ -94,12 +100,17 @@ input { /* Chrome, Firefox, Opera, Safari 10.1+ */
 }
 
 .tapstr-input {
-    width: 300px;
     height: 40px;
     border-radius: 36px;
     -webkit-border-radius: 36px;
     -moz-border-radius: 36px;
     margin: 8px;
+    min-width: 120px;
+    resize: horizontal;
+    width: 70%;
+    overflow: hidden;
+
+    box-sizing: border-box;
 }
 
 </style>

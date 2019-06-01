@@ -19,6 +19,13 @@ export default {
     methods: {
         initMap: function () {
             if (navigator.geolocation) {
+                var element = document.getElementById(this.mapName);
+                    var options = {
+                        zoom: 15,
+                        center: new google.maps.LatLng(52.237049, 21.017532),
+                        disableDefaultUI: true,
+                    };
+                    this.map = new google.maps.Map(element, options);
                 navigator.geolocation.getCurrentPosition((position) => {
                     /* Get geolocation. */
                     this.userLatitude = position.coords.latitude;
@@ -32,13 +39,19 @@ export default {
                         disableDefaultUI: true,
                     };
                     this.map = new google.maps.Map(element, options);
-
-                    map.addListener('zoom_changed', function() {
+                    /*map.addListener('zoom_changed', function() {
                         infowindow.setContent('Zoom: ' + this.map.getZoom());
-                    });
+                    });*/
                 });
             } else {
                 alert("Geolocation is not supported by this browser.");
+                var element = document.getElementById(this.mapName);
+                    var options = {
+                        zoom: 15,
+                        center: new google.maps.LatLng(52.237049, 21.017532),
+                        disableDefaultUI: true,
+                    };
+                    this.map = new google.maps.Map(element, options);
             }
         },
     },

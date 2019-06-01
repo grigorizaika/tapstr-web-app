@@ -3,8 +3,7 @@
     <div @click="toggleSidebar()" id="userImage"></div>
     <sidebar @registerClickedEvent ="this.showRegistration" ref="sidebar"></sidebar>
     <search-panel v-on:click.native="searchClicked()" class="searchPanel"></search-panel>
-    <google-map v-on:click.native="mapClicked()"  class="gMap" ref="gmap"
-  name="example"></google-map>
+    <google-map v-on:click.native="mapClicked()"  class="gMap" ref="gmap" name="example"></google-map>
     <login-form @registerCloseEvent="this.hideRegistration" v-if="this.registerActive" class="loginForm"></login-form>
   </div>
 </template>
@@ -61,10 +60,13 @@ export default {
 #userMainScreen {
   width: 100%;
   /* TODO: Increasing height results in increasing margin-top. Don't know why. Figure it out.*/
-  height: 550px;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  padding: 0;
+
 }
 
 #userImage {
@@ -76,7 +78,9 @@ export default {
   z-index: 99;
   left: 40px;
   top: 64px;
-  background-image: url('../assets/images/user_icon.png');
+  background-image: url('https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/avocado.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   /* border-radius */
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -110,5 +114,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
 }
+
+
 
 </style>
