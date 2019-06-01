@@ -13,5 +13,22 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+    <!--TODO: So the Google API is called asynchronously,
+     according to their instructions. Don't know why.
+     In Vue it's a pain in the ass though.
+         The callback function, initMap(), which I've already deleted,
+     was emitting a custom event, to which the GoogleMap component
+     became a listener. The problem was (I think so), that the event
+     had been emitted before the component has managed to register
+     as a listener of this event, so the component never heard the
+     event and consequently, never triggered the function that
+     creates a map and attaches it to the DOM.
+         Now the Google API is called synchronously and the GoogleMap
+     component does map creation and initialization on its own,
+     without the need for external callback functions, events and such.  -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbdXtYSBjva7HmuJx2zvfoFIOTVClxW8Q"
+  type="text/javascript"></script>
+
   </body>
 </html>

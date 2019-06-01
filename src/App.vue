@@ -1,16 +1,23 @@
 <template>
   <div id="app">
-    <login-form />
+    <user-main-screen ></user-main-screen>
   </div>
 </template>
 
 <script>
-import LoginForm from './components/Login.vue'
+
+import SignupForm from './components/Signup.vue'
+import SearchPanel from './components/Search.vue'
+import GoogleMap from './components/Map.vue'
+import UserMainScreen from './components/UserMainScreen.vue'
 
 export default {
   name: 'app',
   components: {
-    LoginForm
+    SearchPanel,
+    GoogleMap,
+    UserMainScreen,
+    SignupForm
   },
   data: () => ({
     message: "wzhhhh",
@@ -19,7 +26,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Poppins|Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
 #app {
   font-family: 'Poppins', sans-serif;
@@ -27,7 +34,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 .bumblebee-yellow {
@@ -36,28 +42,44 @@ export default {
 
 button {
     width: 250px;
+    min-width: 100px;
     height: 40px;
     border-radius: 36px;
+    -webkit-border-radius: 36px;
+    -moz-border-radius: 36px;
     margin: 4px;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     color: #ffffff;
-
+    background: #ffb101;
     border-width: 0px;
+    cursor: pointer;
+    -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
+    -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+    box-shadow: rgba(0,0,0,0.8) 0 0 10px;
   }
 
-input[type='text'] { /* Chrome, Firefox, Opera, Safari 10.1+ */
+button:focus {
+    outline-color: #ffb101;
+}
+
+input { /* Chrome, Firefox, Opera, Safari 10.1+ */
     font-family: 'Poppins';
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     opacity: 0.9; /* Firefox */
     padding-left: 32px;
-
     border-width: 1px;
+
+    transition: ease-in-out, width .35s ease-in-out;
+    -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
+    -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+    box-shadow: rgba(0,0,0,0.8) 0 0 10px;
   }
+
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     font-family: 'Poppins';
@@ -65,6 +87,19 @@ input[type='text'] { /* Chrome, Firefox, Opera, Safari 10.1+ */
     font-weight: normal;
     font-size: 18px;
     opacity: 0.5; /* Firefox */
-
 }
+
+::selection {
+   background: #ffb101; /* WebKit/Blink Browsers */
+}
+
+.tapstr-input {
+    width: 300px;
+    height: 40px;
+    border-radius: 36px;
+    -webkit-border-radius: 36px;
+    -moz-border-radius: 36px;
+    margin: 8px;
+}
+
 </style>
