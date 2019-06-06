@@ -5,7 +5,8 @@
         <img id="userPicture" style="width:64px; height:64px;" src="https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/oranges.jpg" alt="User Picture">
         <a id="userName">{{ this.username }}</a>
     </div>
-    <a @click="this.registerClicked" href="#">Log In</a>
+    <!--router-link to="/auth">Log In</router-link-->
+    <a @click="goAuth()">Log In</a>
     <a href="#">Account</a>
     <a href="#">Settings</a>
     <a href="#">About</a>
@@ -35,8 +36,9 @@
             hide: function() {
               this.width = 0;
             },
-            registerClicked: function() {
-                this.$emit('registerClickedEvent');
+            goAuth: function() {
+              this.hide();
+              this.$router.push('auth');
             }
         }
 

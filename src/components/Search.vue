@@ -1,11 +1,12 @@
 <template>
 <div id="search-panel">
     <div class="search-wrapper">
-        <input class="tapstr-input search-input " type="text" v-model="search" placeholder="Search restaurants"
-        @focus="searchResultsVisible = true" @blur="searchResultsVisible = false"
-        />
+        <transition name="slide">
+            <input class="tapstr-input search-input " type="text" v-model="search" placeholder="Search restaurants"
+            @focus="searchResultsVisible = true" @blur="searchResultsVisible = false"
+            />
+        </transition>
     </div>
-    <transition name="slide">
     <div v-if="this.searchResultsVisible" class="result-wrapper">
         <div class="card" v-for="result in results" v-bind:key="result">
             <a target="_blank">
@@ -15,8 +16,10 @@
             </a>
         </div>
     </div>
+
+    <transition name="fade">
+        <button v-if="!this.searchResultsVisible" id="venuesAroundButton">Restaurants around me</button>
     </transition>
-    <button v-if="!this.searchResultsVisible" id="venuesAroundButton">Venues around me</button>
 </div>
 </template>
 
@@ -87,10 +90,6 @@ export default {
     border-radius: 36px;
 }
 
-.slide-enter, .slide-leave-to{
-  transform: scaleY(0);
-}
-
 #venuesAroundButton {
     position: absolute;
     margin-left: -120px;
@@ -100,4 +99,19 @@ export default {
 a {
     cursor: pointer;
 }
+
+
+/* <transitions> */
+.slide-enter, .slide-leave-to{
+  transform: scaleY(0);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+/* </transitions> */
 </style>

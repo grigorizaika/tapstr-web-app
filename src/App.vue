@@ -6,18 +6,12 @@
 
 <script>
 
-import SignupForm from './components/Signup.vue'
-import SearchPanel from './components/Search.vue'
-import GoogleMap from './components/Map.vue'
 import UserMainScreen from './components/UserMainScreen.vue'
 
 export default {
   name: 'app',
   components: {
-    SearchPanel,
-    GoogleMap,
     UserMainScreen,
-    SignupForm
   },
   data: () => ({
     message: "wzhhhh",

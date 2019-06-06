@@ -1,10 +1,19 @@
 <template>
   <div id="userMainScreen">
-    <div @click="toggleSidebar()" id="userImage"></div>
-    <sidebar @registerClickedEvent ="this.showRegistration" ref="sidebar"></sidebar>
-    <search-panel v-on:click.native="searchClicked()" class="searchPanel"></search-panel>
-    <google-map v-on:click.native="mapClicked()"  class="gMap" ref="gmap" name="example"></google-map>
-    <login-form @registerCloseEvent="this.hideRegistration" v-if="this.registerActive" class="loginForm"></login-form>
+
+      <div @click="toggleSidebar()" id="userImage"></div>
+      <sidebar ref="sidebar"></sidebar>
+
+      <transition name="fade" mode="out-in">
+        <search-panel id="searchPanel" v-if="searchVisible" v-on:click.native="hideSidebar()" class="searchPanel"></search-panel>
+      </transition>
+
+      <google-map v-on:click.native="hideSidebar()" @mapZoomClose="removeSearch()" @mapZoomFar="displaySearch()" class="gMap" ref="gmap" name="example"></google-map>
+
+      <transition name="fade" mode="out-in">
+          <router-view></router-view>
+      </transition>
+
   </div>
 </template>
 
@@ -12,7 +21,6 @@
 import SearchPanel from './Search.vue'
 import GoogleMap from './Map.vue'
 import Sidebar from './Sidebar.vue'
-import LoginForm from './Login.vue'
 
 export default {
   name: 'UserMainScreen',
@@ -20,38 +28,41 @@ export default {
     SearchPanel,
     GoogleMap,
     Sidebar,
-    LoginForm,
   },
   data: function () {
         return {
           visible: true,
-          searchEnabled : true,
-          mapEnabled: true,
-          registerActive: false,
+          searchVisible : true,
+          mapVisible: true,
+
         }
   },
   methods: {
     toggleSidebar: function() {
       this.$refs.sidebar.toggle();
-      this.hideRegistration();
     },
-    showRegistration: function() {
-      this.toggleSidebar();
-      this.registerActive = true;
-    },
-    hideRegistration: function() {
-      this.registerActive = false;
-    },
-    searchClicked: function() {
+    hideSidebar: function() {
       this.$refs.sidebar.hide();
     },
-    mapClicked: function() {
-      this.$refs.sidebar.hide();
-      this.hideRegistration();
+    removeSearch: function() {
+      /* TODO: replace with a transition later */
+      this.searchVisible = false;
+    },
+    displaySearch: function() {
+      /* TODO: replace with a transition later */
+      this.searchVisible = true;
     }
   },
 
+  watch: {
+  '$route' (to, from) {
+    const toDepth = to.path.split('/').length
+    const fromDepth = from.path.split('/').length
+    if (toDepth > fromDepth) {
 
+    }
+    }
+  }
 };
 </script>
 
@@ -109,12 +120,18 @@ export default {
 }
 
 .loginForm {
-    position: absolute;
+    position: relative;
     z-index: 100;
     margin-left: auto;
     margin-right: auto;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 
 
 </style>
