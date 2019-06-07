@@ -4,18 +4,23 @@
         <transition name="slide">
             <input class="tapstr-input search-input " type="text" v-model="search" placeholder="Search restaurants"
             @focus="searchResultsVisible = true" @blur="searchResultsVisible = false"
+            @keydown="filterResults()"
             />
         </transition>
     </div>
-    <div v-if="this.searchResultsVisible" class="result-wrapper">
-        <div class="card" v-for="result in results" v-bind:key="result">
-            <a target="_blank">
-            <img v-bind:src="result.img"/>
-            <small>{{ result.name }}</small>
-            {{ result.rating_text }}
-            </a>
+    <transition name="slide">
+        <div v-if="this.searchResultsVisible" class="result-wrapper">
+            <transition name="fade">
+            <div v-for="result in filteredResults" v-bind:key="result.id">
+                <a target="_blank">
+                <img v-bind:src="result.img"/>
+                <small>{{ result.name }}</small>
+                {{ result.rating_text }}
+                </a>
+            </div>
+        </transition>
         </div>
-    </div>
+    </transition>
 
     <transition name="fade">
         <button v-if="!this.searchResultsVisible" id="venuesAroundButton">Restaurants around me</button>
@@ -26,6 +31,7 @@
 
 <script>
 import axios from 'axios'
+import Fuse from 'fuse.js'
 
 export default {
     name: "SearchPanel",
@@ -34,6 +40,7 @@ export default {
             visible: true,
             search: '',
             results: [],
+            filteredResults: [],
             searchResultsVisible: false,
             }
     },
@@ -43,15 +50,24 @@ export default {
         },
         show: function() {
             this.visible = true;
-        }
+        },
+
+        filterResults: function() {
+            var fuseOptions = {
+                keys: [{
+                    name: 'name',
+                    weight: 1
+                },
+                {
+                    name: 'cuisine',
+                    weight: 0.5
+                }]
+            }
+            var fuse = new Fuse(this.results, fuseOptions)
+            this.filteredResults = fuse.search(this.search)
+        },
+
     },
-    /*computed: {
-        filteredList() {
-            return this.results.filter(result => {
-                return result.name.toLowerCase().includes(this.search.toLowerCase())
-            });
-        }
-    },*/
     mounted: function() {
            axios.get('http://127.0.0.1:8000/api/restaurants/')
                 .then((response) => {
@@ -79,13 +95,14 @@ export default {
 }
 
 .result-wrapper {
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
+
     position: absolute;
-    margin-left: 92px;
-    width: 300px;
+    margin-left: 48px;
+    width: 80%;
     list-style-type: none;
     transform-origin: top;
-    transition: transform .4s ease-in-out;
+    transition: transform .3s ease-in-out;
     overflow: hidden;
     border-radius: 36px;
 }
