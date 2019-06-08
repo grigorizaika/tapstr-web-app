@@ -1,5 +1,5 @@
 <template>
-  <div id="userMainScreen">
+  <b-container fluid id="userMainScreen">
 
       <div @click="toggleSidebar()" id="userImage"></div>
       <sidebar ref="sidebar"></sidebar>
@@ -14,7 +14,7 @@
           <router-view></router-view>
       </transition>
 
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -77,7 +77,6 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 0;
-
 }
 
 #userImage {
@@ -104,6 +103,11 @@ export default {
 
 #userImage:hover {
   cursor: pointer;
+}
+
+#routerView {
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 .gMap {

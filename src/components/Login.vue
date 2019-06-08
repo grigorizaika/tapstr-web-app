@@ -1,5 +1,5 @@
 <template>
-    <section id="login-section" class="form">
+    <b-container id="login-section" class="form" >
         <div id="loginForm" v-if="isLogin">
           <a class="closebtn" @click="goBack()">&times;</a>
           <h3 class="tapstr-logo bumblebee-yellow">tapstr.</h3>
@@ -29,7 +29,7 @@
           <p>If you do not receive a confirmation email, please check your spam folder. Also, please verify that you entered a valid email address in our sign-up form.</p>
         </div>
 
-    </section>
+    </b-container>
 </template>
 
 
@@ -102,14 +102,8 @@ export default {
 }
 
 
-
 .colors-facebook {
     background: #3b5998;
-    color: #ffffff;
-}
-
-.colors-instagram {
-    background: #833ab4;
     color: #ffffff;
 }
 

@@ -1,17 +1,17 @@
 <template>
 <div class="sidebar" v-bind:style="{ width: this.width+'px', marginLeft: this.marginLeft+'px' }">
     <a href="javascript:void(0)" class="closebtn" @click="toggle()">&times;</a>
-    <div id="userInfo">
-        <img id="userPicture" style="width:64px; height:64px;" src="https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/oranges.jpg" alt="User Picture">
-        <a id="userName">{{ this.username }}</a>
+    <div  id="userInfo">
+        <img @click="goUser()" id="userPicture" style="width:64px; height:64px;" src="https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/oranges.jpg" alt="User Picture">
+        <a @click="goUser()" id="userName">{{ this.username }}</a>
     </div>
     <!--router-link to="/auth">Log In</router-link-->
     <a @click="goAuth()">Log In</a>
-    <a href="#">Account</a>
+
     <a href="#">Settings</a>
     <a href="#">About</a>
 
-     <button id="logoutButton">Log out</button>
+     <b-button id="logoutButton" class="rounded-pill">Log out</b-button>
 </div>
 </template>
 
@@ -36,10 +36,17 @@
             hide: function() {
               this.width = 0;
             },
+
+            /* <route-related> */
             goAuth: function() {
               this.hide();
               this.$router.push('auth');
+            },
+            goUser: function() {
+              this.hide();
+              this.$router.push('user');
             }
+            /* </route-related> */
         }
 
     };
@@ -108,6 +115,10 @@
     bottom: 112px;
     left: 10%;
 
+}
+
+#userPicture {
+  cursor: pointer;
 }
 
 </style>

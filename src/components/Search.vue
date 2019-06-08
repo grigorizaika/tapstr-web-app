@@ -13,7 +13,6 @@
             <transition name="fade">
             <div v-for="result in filteredResults" v-bind:key="result.id">
                 <a target="_blank">
-                <img v-bind:src="result.img"/>
                 <small>{{ result.name }}</small>
                 {{ result.rating_text }}
                 </a>
@@ -23,7 +22,7 @@
     </transition>
 
     <transition name="fade">
-        <button v-if="!this.searchResultsVisible" id="venuesAroundButton">Restaurants around me</button>
+        <b-button v-if="!this.searchResultsVisible" id="venuesAroundButton" class="rounded-pill">Restaurants around me</b-button>
     </transition>
 </div>
 </template>
@@ -71,7 +70,6 @@ export default {
     mounted: function() {
            axios.get('http://127.0.0.1:8000/api/restaurants/')
                 .then((response) => {
-                    console.log(this.search + " ");
                     this.results = response.data.results;
                 });
     },
@@ -111,6 +109,7 @@ export default {
     position: absolute;
     margin-left: -120px;
     top: 80px;
+    background: #ffb101;
 }
 
 a {
