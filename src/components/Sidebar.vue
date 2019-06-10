@@ -8,7 +8,7 @@
     <!--router-link to="/auth">Log In</router-link-->
     <a @click="goAuth()">Log In</a>
 
-    <a href="#">Settings</a>
+    <!--a href="#">Settings</a-->
     <a href="#">About</a>
 
      <b-button id="logoutButton" class="rounded-pill">Log out</b-button>

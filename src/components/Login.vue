@@ -1,7 +1,7 @@
 <template>
     <b-container id="login-section" class="form" >
         <div id="loginForm" v-if="isLogin">
-          <a class="closebtn" @click="goBack()">&times;</a>
+          <!--a class="closebtn" @click="goBack()">&times;</a>
           <h3 class="tapstr-logo bumblebee-yellow">tapstr.</h3>
           <input class="tapstr-input" type="text" name="femail" placeholder="Email"><br/>
           <input class="tapstr-input" type="password" name="fassword" placeholder="Password"><br/>
@@ -26,14 +26,20 @@
         <div id="verificationMessage" v-if="isRegistrationFinished" style="color: #ffffff;">
           <a class="closebtn" @click="goBack()">&times;</a>
           <p>We have sent an email with a confirmation link to your email address. In order to complete the sign-up process, please click the confirmation link. </p>
-          <p>If you do not receive a confirmation email, please check your spam folder. Also, please verify that you entered a valid email address in our sign-up form.</p>
+          <p>If you do not receive a confirmation email, please check your spam folder. Also, please verify that you entered a valid email address in our sign-up form.</p-->
+            <amplify-authenticator></amplify-authenticator>
+
         </div>
 
     </b-container>
+
+
 </template>
 
 
 <script>
+import { Auth } from 'aws-amplify'
+
 export default {
   name: 'LoginForm',
   data: () => ({

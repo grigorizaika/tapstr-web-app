@@ -3,17 +3,17 @@
             <b-row >
                 <b-col cols="4" align-self="center">
                     <img id="userPicture" style="width: 128px; height: 128px;" src="https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/oranges.jpg" alt="User Picture" class="m-2">
-                    <div style="height: 256px;"></div>
+
                 </b-col>
                 <b-col cols="4" >
-                    <div id="userInfo" style="padding: 24px;" align-self="center">
+                    <div id="userAccountInfo" align-self="center">
                         <p contenteditable="true" id="userName" class="m-2">{{ user.name }}</p>
-                        <b-form-input v-model="user.email" placeholder="Email" class="rounded-pill m-4">{{ user.email }}</b-form-input>
-                        <b-form-input type="password" placeholder="New password" class="rounded-pill mt-4"></b-form-input>
-                        <b-form-input type="password" placeholder="Repeat password" class="rounded-pill mt-2 mb-4"></b-form-input>
-                        <b-form-input v-model="user.phone_number" placeholder="Mobile phone" class="rounded-pill m-4">{{ user.phone_number }}</b-form-input>
-                        <b-form-input v-model="user.city" placeholder="City" class="rounded-pill m-4">{{ user.city }}</b-form-input>
-                        <b-button class="rounded-pill m-4">Save changes</b-button>
+                        <b-form-input v-model="user.email" placeholder="Email" class="rounded-pill m-4 w-75">{{ user.email }}</b-form-input>
+                        <b-form-input type="password" placeholder="New password" class="rounded-pill mt-4 w-75"></b-form-input>
+                        <b-form-input type="password" placeholder="Repeat password" class="rounded-pill mt-2 mb-4 w-75"></b-form-input>
+                        <b-form-input v-model="user.phone_number" placeholder="Mobile phone" class="rounded-pill m-4 w-75">{{ user.phone_number }}</b-form-input>
+                        <b-form-input v-model="user.city" placeholder="City" class="rounded-pill m-4 w-75">{{ user.city }}</b-form-input>
+                        <b-button class="rounded-pill m-4 ">Save changes</b-button>
                     </div>
                 </b-col>
                 <b-col cols="4" style="padding: 24px;">
@@ -48,5 +48,15 @@ export default {
 #userAccountSection {
     background-color: #e3e3e3;
     z-index: 100;
+}
+
+#userAccountInfo {
+    padding: 12px;
+    box-shadow: 0 0 10px #a0a0a0;
+    background-color: #cecece;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 </style>
