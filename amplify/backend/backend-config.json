@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"tapstrwebapp86ec95c2": {
+		"tapstrauth": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation"
 		}

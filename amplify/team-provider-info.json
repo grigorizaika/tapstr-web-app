@@ -1,18 +1,22 @@
 {
     "tapstrenv": {
         "awscloudformation": {
-            "AuthRoleName": "tapstr-web-app-tapstrenv-20190609143243-authRole",
-            "UnauthRoleArn": "arn:aws:iam::010535520734:role/tapstr-web-app-tapstrenv-20190609143243-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::010535520734:role/tapstr-web-app-tapstrenv-20190609143243-authRole",
+            "AuthRoleName": "tapstr-tapstrenv-20190612120044-authRole",
+            "UnauthRoleArn": "arn:aws:iam::010535520734:role/tapstr-tapstrenv-20190612120044-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::010535520734:role/tapstr-tapstrenv-20190612120044-authRole",
             "Region": "eu-central-1",
-            "DeploymentBucketName": "tapstr-web-app-tapstrenv-20190609143243-deployment",
-            "UnauthRoleName": "tapstr-web-app-tapstrenv-20190609143243-unauthRole",
-            "StackName": "tapstr-web-app-tapstrenv-20190609143243",
-            "StackId": "arn:aws:cloudformation:eu-central-1:010535520734:stack/tapstr-web-app-tapstrenv-20190609143243/ae0efb60-8ab2-11e9-80dc-0269f2d0f086"
+            "DeploymentBucketName": "tapstr-tapstrenv-20190612120044-deployment",
+            "UnauthRoleName": "tapstr-tapstrenv-20190612120044-unauthRole",
+            "StackName": "tapstr-tapstrenv-20190612120044",
+            "StackId": "arn:aws:cloudformation:eu-central-1:010535520734:stack/tapstr-tapstrenv-20190612120044/f2110310-8cf8-11e9-8329-066084ff6f3a"
         },
         "categories": {
             "auth": {
-                "tapstrwebapp86ec95c2": {}
+                "tapstrauth": {
+                    "facebookAppId": "2266339183619636",
+                    "googleClientId": "481025147392-8kaufs14d0civrnfqn99ii5hogaq7hde.apps.googleusercontent.com",
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"2266339183619636\",\"client_secret\":\"320f9eb4db1218bc340850f7b9e7050e\"},{\"ProviderName\":\"Google\",\"client_id\":\"481025147392-8kaufs14d0civrnfqn99ii5hogaq7hde.apps.googleusercontent.com\",\"client_secret\":\"ItTIb3KBmCLEtfWJ83mD4QQD\"}]"
+                }
             }
         }
     }
