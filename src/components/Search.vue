@@ -2,10 +2,9 @@
 <div id="search-panel">
     <div class="search-wrapper">
         <transition name="slide">
-            <input class="tapstr-input search-input " type="text" v-model="search" placeholder="Search restaurants"
+            <b-input class="" type="text" v-model="search" placeholder="Search restaurants"
             @focus="searchResultsVisible = true" @blur="searchResultsVisible = false"
-            @keydown="filterResults()"
-            />
+            @keydown="filterResults()" class="rounded-pill"/>
         </transition>
     </div>
     <transition name="slide">
@@ -19,10 +18,6 @@
             </div>
         </transition>
         </div>
-    </transition>
-
-    <transition name="fade">
-        <b-button v-if="!this.searchResultsVisible" id="venuesAroundButton" class="rounded-pill">Restaurants around me</b-button>
     </transition>
 </div>
 </template>
@@ -78,19 +73,6 @@ export default {
 
 
 <style>
-
-
-.search-input {
-    width: 432px;
-    height: 40px;
-    border-radius: 36px;
-
-}
-
-.search-input:focus {
-  width: 100% !important;
-  outline-width: 0 !important;
-}
 
 .result-wrapper {
     background: rgba(255, 255, 255, 0.8);

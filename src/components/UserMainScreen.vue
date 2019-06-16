@@ -1,18 +1,44 @@
 <template>
-  <b-container fluid id="userMainScreen">
-
-      <div @click="toggleSidebar()" id="userImage"></div>
+  <b-container fluid id="userMainScreen" class="p-0 m-0">
       <sidebar ref="sidebar"></sidebar>
-
-      <transition name="fade" mode="out-in">
-        <search-panel id="searchPanel" v-if="searchVisible" v-on:click.native="hideSidebar()" class="searchPanel"></search-panel>
-      </transition>
-
+      <restaurant-sidebar></restaurant-sidebar>
       <google-map v-on:click.native="hideSidebar()" @mapZoomClose="removeSearch()" @mapZoomFar="displaySearch()" class="gMap" ref="gmap" name="example"></google-map>
 
-      <transition name="fade" mode="out-in">
-          <router-view></router-view>
-      </transition>
+
+      <b-row class="vh-100">
+
+        <b-col cols="9">
+
+          <b-row class="h-25 p-4">
+            <b-col cols="2">
+              <div @click="toggleSidebar()" id="userImage" class="mx-auto"></div>
+            </b-col>
+          </b-row>
+
+          <b-row class="h-50 p-4">
+
+            <b-col cols="6">
+            </b-col>
+            <b-col cols="5">
+              <!--transition name="fade" mode="out-in">
+                <search-panel id="searchPanel" v-if="searchVisible" v-on:click.native="hideSidebar()"></search-panel>
+              </transition-->
+
+            </b-col>
+            <b-col cols="1">
+            </b-col>
+
+          </b-row>
+
+      </b-col>
+
+      <b-col cols="3">
+        <b-row class="h-100">
+        </b-row>
+      </b-col>
+
+    </b-row>
+
 
   </b-container>
 </template>
@@ -21,6 +47,9 @@
 import SearchPanel from './Search.vue'
 import GoogleMap from './Map.vue'
 import Sidebar from './Sidebar.vue'
+import RestaurantSidebar from './RestaurantSidebar.vue'
+import { Auth } from 'aws-amplify'
+import { AmplifyEventBus } from 'aws-amplify-vue'
 
 export default {
   name: 'UserMainScreen',
@@ -28,16 +57,66 @@ export default {
     SearchPanel,
     GoogleMap,
     Sidebar,
+    RestaurantSidebar,
   },
   data: function () {
         return {
           visible: true,
           searchVisible : true,
           mapVisible: true,
+          resturantSidebarVisible: true,
 
+          user: Object,
+          session: Object,
+          signedIn: false,
         }
   },
+  created() {
+    this.findUser();
+    /* AmplifyEventBus events pertain to amplify components.
+       Here we add a listener for the auth components, and when
+       they are triggered, info is returned, e. g. 'signedIn', 'signedOut', 'signUp',
+       https://aws-amplify.github.io/docs/js/vue#amplifyeventbus
+    */
+    AmplifyEventBus.$on('authState', info => {
+      if(info === "signedIn") {
+        console.log("info: ")
+        console.log(info)
+        this.findUser();
+      } else if(info == "signedOut") {
+        this.$store.commit('changeUserClient', undefined);
+        this.$store.commit('changeUserSession', undefined);
+      }
+      else {
+        console.log("info: ")
+        console.log(info)
+        this.signedIn = false;
+      }
+    });
+  },
+
   methods: {
+    async findUser() {
+      try {
+        /*
+          TODO:
+          appending
+          .then((data) => console.log(data)) or
+          .catch((err) => console.log('err ' + err));
+          to Auth.currentAuthenticatedUser()
+          results in this.user staying undefined
+          why?
+
+          read up on promises, callbackes, async, await.
+        */
+        this.$store.commit('changeUserClient', await Auth.currentAuthenticatedUser());
+        this.$store.commit('changeUserSession', await Auth.currentSession());
+      } catch (err) {
+        console.log(err)
+       /* this.$store.commit('changeIsSignedIn', false);*/
+      }
+    },
+
     toggleSidebar: function() {
       this.$refs.sidebar.toggle();
     },
@@ -51,7 +130,8 @@ export default {
     displaySearch: function() {
       /* TODO: replace with a transition later */
       this.searchVisible = true;
-    }
+    },
+
   },
 
   watch: {
@@ -69,25 +149,20 @@ export default {
 <style>
 
 #userMainScreen {
-  width: 100%;
-  /* TODO: Increasing height results in increasing margin-top. Don't know why. Figure it out.*/
-  height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 0 0;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
 }
 
 #userImage {
   width: 64px;
   height: 64px;
-  border-radius: 50%;
+  left: calc(50% - 32px);
+  top: calc(50% - 32px);
   position: absolute;
   background: #ffffff;
   z-index: 99;
-  left: 40px;
-  top: 64px;
   background-image: url('https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/avocado.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -105,6 +180,13 @@ export default {
   cursor: pointer;
 }
 
+#searchPanel {
+  position: absolute;
+  z-index: 99;
+}
+
+
+
 #routerView {
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
@@ -112,16 +194,11 @@ export default {
 
 .gMap {
   position: absolute;
-  z-index: 98;
+  z-index: 10;
+  padding: 0;
+  margin: 0;
 }
 
-.searchPanel {
-  position: absolute;
-  z-index: 99;
-  margin-left: auto;
-  margin-right: auto;
-
-}
 
 .loginForm {
     position: relative;
@@ -129,13 +206,5 @@ export default {
     margin-left: auto;
     margin-right: auto;
 }
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-
 
 </style>

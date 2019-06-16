@@ -3,15 +3,14 @@
     <a href="javascript:void(0)" class="closebtn" @click="toggle()">&times;</a>
     <div  id="userInfo">
         <img @click="goUser()" id="userPicture" style="width:64px; height:64px;" src="https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/oranges.jpg" alt="User Picture">
-        <a @click="goUser()" id="userName">{{ this.username }}</a>
+        <a @click="goUser()" id="userName">{{ this.userEmail }}</a>
     </div>
     <!--router-link to="/auth">Log In</router-link-->
-    <a @click="goAuth()">Log In</a>
+    <a @click="goAuth()" v-if="!this.isLoggedIn">Log In</a>
 
     <!--a href="#">Settings</a-->
     <a href="#">About</a>
-
-     <b-button id="logoutButton" class="rounded-pill">Log out</b-button>
+      <amplify-sign-out id="logoutButton" v-if="this.isLoggedIn"></amplify-sign-out>
 </div>
 </template>
 
@@ -22,8 +21,12 @@
             return {
                 width: 0,
                 marginLeft: 0,
-                username: "Foody Fooderson",
             }
+        },
+        computed: {
+          userClient() { return this.$store.getters.userClient },
+          userEmail() { return this.$store.getters.isUserSignedIn ? this.$store.getters.userClient.attributes.email : "foody@fooderson.fo"},
+          isLoggedIn() { return this.$store.getters.isUserSignedIn },
         },
         methods: {
             toggle: function() {
@@ -109,10 +112,8 @@
 }
 
 #logoutButton {
-    width: 200px;
-    background-color: #b3b3b3;
     position: absolute;
-    bottom: 112px;
+    bottom: 10%;
     left: 10%;
 
 }

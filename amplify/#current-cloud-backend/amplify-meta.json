@@ -1,0 +1,40 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "tapstr-tapstrenv-20190612120044-authRole",
+			"UnauthRoleArn": "arn:aws:iam::010535520734:role/tapstr-tapstrenv-20190612120044-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::010535520734:role/tapstr-tapstrenv-20190612120044-authRole",
+			"Region": "eu-central-1",
+			"DeploymentBucketName": "tapstr-tapstrenv-20190612120044-deployment",
+			"UnauthRoleName": "tapstr-tapstrenv-20190612120044-unauthRole",
+			"StackName": "tapstr-tapstrenv-20190612120044",
+			"StackId": "arn:aws:cloudformation:eu-central-1:010535520734:stack/tapstr-tapstrenv-20190612120044/f2110310-8cf8-11e9-8329-066084ff6f3a"
+		}
+	},
+	"auth": {
+		"tapstrauth": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/tapstr-tapstrenv-20190612120044-deployment/amplify-cfn-templates/auth/tapstrauth-cloudformation-template.yml",
+				"logicalId": "authtapstrauth"
+			},
+			"lastPushTimeStamp": "2019-06-12T10:25:53.094Z",
+			"output": {
+				"GoogleWebClient": "481025147392-8kaufs14d0civrnfqn99ii5hogaq7hde.apps.googleusercontent.com",
+				"CreatedSNSRole": "arn:aws:iam::010535520734:role/tapstrf255d044_sns-role-tapstrenv",
+				"AppClientSecret": "jaqf0q7qi927dka4lf8e8m9jluhkb2i4d31oes1tovcm2gter2q",
+				"UserPoolId": "eu-central-1_aq1dWQbEb",
+				"AppClientIDWeb": "7502ms3eck4ctpgl67iojsd1kl",
+				"AppClientID": "6v3jlooqdo19mn4qeilrn58pd0",
+				"HostedUIDomain": "tapstr-tapstrenv",
+				"FacebookWebClient": "2266339183619636",
+				"IdentityPoolId": "eu-central-1:9e53f86a-8bd3-4645-956e-ed13569ccba0",
+				"IdentityPoolName": "tapstrpool__tapstrenv",
+				"OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://tapstr.io/login/\"],\"LogoutURLs\":[\"https://tapstr.io/logout/\"]}",
+				"UserPoolName": "tapstr"
+			},
+			"lastPushDirHash": "IPh67GxOJ1odq7ZJf6GG8q2AHks="
+		}
+	}
+}

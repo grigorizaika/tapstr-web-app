@@ -1,0 +1,8 @@
+{
+	"auth": {
+		"tapstrauth": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}
