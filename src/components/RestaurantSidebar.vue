@@ -1,9 +1,9 @@
 <template>
-    <div id="restaurantSidebar" v-bind:style="{ right: this.positionRight+'vw' }">
+    <div id="restaurantSidebar" v-bind:style="{ right: this.positionRight+'%' }">
         <b-row class="h-100 p-0 m-0">
 
-            <div @click="toggle()" id="restaurantSidebarToggler">
-                <font-awesome-icon icon="bars" style="color: white"/>
+            <div @click="toggle()" id="restaurantSidebarToggler" >
+                <font-awesome-icon id="togglerArrow" v-bind:style="{ transform: 'rotate('+this.arrowRotationAngle+'deg)'}" icon="arrow-left" style="color: white"/>
             </div>
 
             <b-col cols="12" class="m-0 p-0">
@@ -15,7 +15,7 @@
                     </b-row>
                     <b-row id="suggestedRestaurants" class="p-1">
                         <b-col cols="12">
-                            <b-row v-for="restaurant in suggestedRestaurantList" class="h-30 m-1">
+                            <b-row v-for="restaurant in suggestedRestaurantList" v-bind:key="restaurant" class="h-30 m-1">
                                 <b-col cols="11">
                                     <div @click="$router.push('restaurants/' + restaurant.id)" class="suggestedRestaurantBox">
                                         <div class="suggestedRestaurantBoxContent">
@@ -62,6 +62,7 @@ export default {
         return {
             positionRight: -26,
             visible: true,
+            arrowRotationAngle: 0,
 
             suggestedRestaurantList: [],
         }
@@ -72,6 +73,7 @@ export default {
     methods: {
         toggle() {
             this.positionRight == 0 ? this.positionRight = -26 : this.positionRight = 0;
+            this.arrowRotationAngle == 180 ? this.arrowRotationAngle = 0 : this.arrowRotationAngle = 180;
         },
         getSuggestedRestaurants() {
 
@@ -116,13 +118,18 @@ export default {
     -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
     -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
     box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+
+    -moz-transition:all 200ms ease-in;
+    -webkit-transition:all 200ms ease-in;
+    -o-transition:all 200ms ease-in;
+    transition:all 200ms ease-in;
 }
 
 
 #restaurantSidebarToggler {
   position: absolute;
   top: 45%;
-  left: -64px;
+  left: -63px;
   height: 48px;
   width: 48px;
   background: #ffb101;
@@ -130,7 +137,21 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  
 }
+
+#togglerArrow {
+    -webkit-transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -ms-transform:rotate(0deg);
+    -o-transform:rotate(0deg);
+    transform:rotate(0deg);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
 
 #restaurantSidebarToggler:hover {
     cursor: pointer;
@@ -168,6 +189,8 @@ export default {
     -webkit-box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
     -moz-box-shadow: rgba(0,0,0,0.8) 0 0 10px;
     box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+
+    overflow: hidden;
 }
 
 .restaurantHistoryBox:before {
@@ -200,6 +223,7 @@ export default {
     height: 100%;
     background: blue;
     text-align: center;
+    overflow: hidden;
 }
 
 .suggestedRestaurantBox:hover {

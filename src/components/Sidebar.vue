@@ -1,17 +1,21 @@
 <template>
 <div class="sidebar" v-bind:style="{ width: this.width+'px', marginLeft: this.marginLeft+'px' }">
     <a href="javascript:void(0)" class="closebtn" @click="toggle()">&times;</a>
-    <div  id="userInfo">
+    <transition name="fade">
+      <div  id="userInfo" v-if="itemsVisible">
         <img @click="goUser()" id="userPicture" style="width:64px; height:64px;" src="https://tapstr-files.s3.eu-central-1.amazonaws.com/images/menu/oranges.jpg" alt="User Picture">
         <a @click="goUser()" id="userName">{{ this.userEmail }}</a>
-    </div>
-    <!--router-link to="/auth">Log In</router-link-->
-    <a @click="goAuth()" v-if="!this.isLoggedIn">Log In</a>
-
-    <!--a href="#">Settings</a-->
-    <a href="#">About</a>
+      </div>
+    </transition> 
+    <transition name="fade"> 
+      <div v-if="itemsVisible" id="sidebarItems">
+      <a @click="goAuth()" v-if="!this.isLoggedIn">Log In</a>
+      <a href="#">About</a>
+      
       <amplify-sign-out id="logoutButton" v-if="this.isLoggedIn"></amplify-sign-out>
-</div>
+      </div>
+    </transition> 
+  </div>
 </template>
 
 <script >
@@ -20,6 +24,7 @@
         data: function() {
             return {
                 width: 0,
+                itemsVisible: false,
                 marginLeft: 0,
             }
         },
@@ -30,14 +35,17 @@
         },
         methods: {
             toggle: function() {
-                if(this.width == 0) {
+                if(this.width == 0 && !this.itemsVisible) {
+                    this.itemsVisible = true
                     this.width = 250;
                 } else {
+                    this.itemsVisible = false
                     this.width = 0;
                 }
             },
             hide: function() {
-              this.width = 0;
+              this.width = 0
+              this.itemsVisible = false
             },
 
             /* <route-related> */
@@ -95,6 +103,9 @@
    align-items: center;
    justify-content: center;
    flex-direction: column;
+
+
+   transition: fade 1.3s;
 }
 
 #userName {
@@ -103,12 +114,18 @@
   font-size: 20px;
   color: #818181;
   display: block;
-  transition: 0.3s;
 }
 
 #userPicture {
     border-radius: 50%;
     background: black;
+}
+
+#sidebarItems {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #logoutButton {
@@ -120,6 +137,13 @@
 
 #userPicture {
   cursor: pointer;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 </style>

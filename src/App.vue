@@ -34,12 +34,12 @@ export default {
   width: 100vw;
   min-height: 100vh;
   padding: 0;
-
 }
 
 body {
   padding: 0;
   margin: 0;
+
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -59,6 +59,7 @@ body {
   left: 0;
   top: 0;
   z-index: 999;
+  
 }
 
 .fade-enter-active, .fade-leave-active {

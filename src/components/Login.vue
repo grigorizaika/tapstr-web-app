@@ -1,7 +1,15 @@
 <template>
-    <b-container id="login-section" class="form" >
-      <div><a @click="$router.go(-1)">&times;</a></div>
-      <amplify-authenticator></amplify-authenticator>
+    <b-container fluid id="loginSection" style="width: 100vw; min-height: 100vh;">
+      <b-row>
+        <b-col cols="3" sm="1" md="3" lg="3"></b-col>
+        <b-col cols="5" sm="8" md="6" lg="5">
+          <div id="authBox">
+                <a @click="$router.go(-1)" id="closeBtn">&times;</a>
+                <amplify-authenticator></amplify-authenticator>
+          </div>
+        </b-col>
+        <b-col cols="4" sm="2" md="3" lg="4"></b-col>
+      </b-row>
     </b-container>
 
 
@@ -47,14 +55,26 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 /* These imports should be in a single main file */
 @import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
 
 
 
-#login-section {
+#loginSection {
     z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0;
+    margin: 0;
+}
+
+#authBox {
+  display: flex;
+  align-items: right;
+  align-content: right;
+  justify-content: right;
+  flex-direction: column;
+  text-align: right;
 }
 
 .tapstr-logo {
@@ -73,16 +93,11 @@ export default {
     color: #ffffff;
 }
 
-#login-section .closebtn {
-  position: absolute;
-  top: 0;
-  right: 432px;
+#closeBtn {
   font-size: 32px;
-  margin-left: 20px;
-  padding: 12px;
   text-decoration: none;
-  color: white;
-  display: block;
+  color: white;  
+  align-self: right;
   transition: 0.3s;
 }
 
